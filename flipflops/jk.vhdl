@@ -10,25 +10,23 @@ entity JK_FF is
 end JK_FF;
 
 architecture behav of JK_FF is
-    
+    signal buff_out : std_logic := '0';
 begin
     process(J,K,clk)
-    variable buff_out : std_logic := '0';
     begin
         if (clk = '1' and clk'event) then
             if (J='1' and K='0') then
-                buff_out := '1';
+                buff_out <= '1';
             elsif (J='0' and K='1') then
-                buff_out := '0';
+                buff_out <= '0';
             elsif (J='1' and K='1') then
-                buff_out := not buff_out;
+                buff_out <= not buff_out;
             end if;
-
-            Q <= buff_out;
         end if;
-
-        
     end process;
+
+    Q <= buff_out;
+    
 end behav;
 
 
